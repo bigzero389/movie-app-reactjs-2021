@@ -16,13 +16,14 @@
     const root = document.getElementById("root");
 
     function App () {
-      let [counter, setCounter] = React.useState(0);
+      const [counter, setCounter] = React.useState(0);
 
       const onClick = () => {
         // const 에서 counter++  이렇게 하면 readOnly 에러 발생함.
         // let 으로 변경한 후 counter++ 하면 두번씩 1이 더해짐.
         console.log(`before set counter : ${counter}`);
-        setCounter(counter + 1); 
+        // setCounter(counter + 1); 
+        setCounter((current) => current + 1);
         console.log(`after set counter : ${counter}`);
       }
 
