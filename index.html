@@ -14,25 +14,27 @@
     //   console.log(counter);
     // }
     const root = document.getElementById("root");
-    let cnt = 0;
 
     function App () {
-      let [counter, modifier] = React.useState(0);
+      let [counter, setCounter] = React.useState(0);
+
       const onClick = () => {
-        counter++;
-        console.log(counter);
+        // const 에서 counter++  이렇게 하면 readOnly 에러 발생함.
+        // let 으로 변경한 후 counter++ 하면 두번씩 1이 더해짐.
+        console.log(`before set counter : ${counter}`);
+        setCounter(counter + 1); 
+        console.log(`after set counter : ${counter}`);
       }
 
       return (
         <div>
           <h3>Total clicks: {counter}</h3>
-          <button>Click me</button>
+          <button onClick={onClick}>Click me</button>
         </div>
       );
     }       
 
     render();
-
     function render() {
       ReactDOM.render(<App/>, root);
     }
