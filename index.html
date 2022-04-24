@@ -7,30 +7,32 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    // 함수라서 바로 실행되지 않는다.
-    // function countUp() {
-    //   counter++;
-    //   render();
-    //   console.log(counter);
-    // }
-    const root = document.getElementById("root");
+   const root = document.getElementById("root");
 
     function App () {
-      const [counter, setCounter] = React.useState(0);
+      const [minutes, setMinutes] = React.useState();
 
-      const onClick = () => {
-        // const 에서 counter++  이렇게 하면 readOnly 에러 발생함.
-        // let 으로 변경한 후 counter++ 하면 두번씩 1이 더해짐.
-        console.log(`before set counter : ${counter}`);
-        // setCounter(counter + 1); 
-        setCounter((current) => current + 1);
-        console.log(`after set counter : ${counter}`);
+      const onChange = (event) => {
+        setMinutes(event.target.value);
+        console.log(`somebody wrote : ${event.target.value}`);
+      }
+
+      const reset = () => {
+        setMinutes(0);
       }
 
       return (
         <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={onClick}>Click me</button>
+          <h1 className="hi">Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input 
+            id="minutes" placeholder="Minutes" type="number" value={minutes}
+            onChange={onChange}
+          />
+          <h3>Yun want to convert {minutes}</h3>
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" value={Math.round(minutes / 60)} placeholder="Hours" type="number" />
+          <button onClick={reset}>reset</button>
         </div>
       );
     }       
