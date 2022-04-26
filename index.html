@@ -7,71 +7,25 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function MinutesToHours() {
-      const [amount, setAmount] = React.useState();
-      const [inverted, setInverted] = React.useState(false);
-
-      const changeAmount = (event) => {
-        setAmount(event.target.value);
-        console.log(`somebody wrote : ${event.target.value}`);
-      }
-
-      const changeInvert = () => {
-        resetAmount();
-        setInverted((current) => !current);
-      }
-      const resetAmount = () => setAmount(0);     
-
-      return (
-        <div>
-          <div>
-            <label htmlFor="minutes">Minutes</label>
-            <input 
-              value={inverted ? amount*60 : amount} 
-              id="minutes" placeholder="Minutes" type="number" 
-              onChange={changeAmount}
-              disabled={inverted}
-            />
-          </div>
-          <div>
-            <label htmlFor="hours">Hours</label>
-            <input 
-              value={inverted ? amount : Math.round(amount / 60)}
-              id="hours" placeholder="Hours" type="number" 
-              onChange={changeAmount}
-              disabled={!inverted}
-            />  
-          </div>
-          <button onClick={resetAmount}>reset</button>
-          <button onClick={changeInvert}>{inverted ? "Turn back": "Inverted"}</button>
-        </div>
-      );
-    }
-
-    function KmToMiles() {
-      return <h3>KM 2 M </h3>
+    function Btn({text, big}) {
+      console.log({text, big});
+      return <button style={{
+          backgroundColor : "tomato",
+          colro: "white",
+          padding: "10px 20px",
+          border: 0,
+          borderRadius: 10,
+          fontSize: big ? 20 : 10
+        }}
+        >{text}
+      </button>
     }
 
     function App () {
-      const [index, setIndex] = React.useState("x");
-
-      const changeIndex = (event) => {
-        console.log(event.target.value);
-        setIndex(() => event.target.value)
-      }
-
       return (
         <div>
-          <h1 className="hi">Super Converter</h1>
-          <select value={index} onChange={changeIndex}>
-            <option value="X">Select your units</option>
-            <option value="0">Minutes to Hours</option>
-            <option value="1">Km to Miles</option>
-          </select>
-          <hr />
-          {index == "x" ? "Please select your unit" : null}
-          {index == "0" ? <MinutesToHours/> : null}
-          {index == "1" ? <KmToMiles/> : null}
+          <Btn  text="Save Changes" big={true}/>
+          <Btn  text="Continue" big={false}/>
         </div>
       );
     }       
