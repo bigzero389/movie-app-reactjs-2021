@@ -9,8 +9,8 @@
   <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
 
+    // function Btn(props) {  // 이렇게 쓰는게 원칙이지만 코드가 길어져서 아무도 이렇게 안쓴다.
     function Btn({text, fontSize = 10, onClick}) {
-      // console.log({text});
       console.log(text, " was renderd");
       return <button 
         onClick={onClick}
