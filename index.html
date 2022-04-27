@@ -3,29 +3,35 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
 
-    function Btn({text, onClick}) {
+    function Btn({text, fontSize = 10, onClick}) {
       // console.log({text});
       console.log(text, " was renderd");
       return <button 
-        onClick={onClick} 
+        onClick={onClick}
         style={{
           backgroundColor : "tomato",
           color: "white",
           padding: "10px 20px",
           border: 0,
           borderRadius: 10,
-          fontSize: 16
+          fontSize,
         }}
         >{text}
       </button>
     }
 
-    const MemorizedBtn = React.memo(Btn);
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+      onClick: PropTypes.func,
+    }
+
     function App () {
       const [flag, setFlag] = React.useState(true);
       const [text, setText] = React.useState("Init");
@@ -36,8 +42,8 @@
 
       return (
         <div>
-          <MemorizedBtn text={text} onClick={changeFlag} />
-          <MemorizedBtn text="Not Changes" />
+          <Btn text={text} fontSize={18} onClick={changeFlag} />
+          <Btn text={text} onClick={changeFlag} />
         </div>
       );
     }       
