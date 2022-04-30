@@ -8,10 +8,12 @@ function App() {
   const onSubmit = (event) => {
     event.preventDefault();
     if (toDo === "" ) { return; }    
-    setToDos((currentToDos) => [toDo, ...currentToDos]);
+    setToDos((currentToDos) => {
+      return [toDo, ...currentToDos];
+    });
     setToDo("");
-    console.log(toDos);
   }
+  // console.log(toDos);
 
   return (
     <div>
@@ -20,6 +22,10 @@ function App() {
         <input onChange={onChange} value={toDo} type="text" placeholder="Write your todo..."></input>
         <button>Add ToDo</button>
       </form>
+      <hr />
+      <ul>
+        {toDos.map( (item, index) => <li key={index}>{item}</li> )}
+      </ul>
    </div>
   )
 }
